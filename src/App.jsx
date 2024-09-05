@@ -1,9 +1,10 @@
-import StudentList from "./components/Students/StudentList";
+import Student from "./components/Students/Student";
 
 function App() {
   return (
     <>
-      <StudentList/>
+      {/* <Counter /> */}
+      <Student />
     </>
   );
 }
