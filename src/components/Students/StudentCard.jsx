@@ -2,8 +2,8 @@
 import cssClasses from "./studentCard.module.css";
 const StudentCard = ({ name, sID, major, avatar }) => {
   return (
-    <div>
-      <div className="studentHeader">
+    <div className="border p-[1rem] border-slate-600 rounded-md cursor-pointer transition-all duration-500 ease-in-out hover:scale-90 hover:bg-slate-900 hover:text-white ">
+      <div>
         <div>
           <img src={avatar} alt={name} className={cssClasses.studentCardImg} />
           <div>
@@ -12,7 +12,7 @@ const StudentCard = ({ name, sID, major, avatar }) => {
           </div>
         </div>
       </div>
-      <div className="studentMajor">Major: {major}</div>
+      <div>Major: {major}</div>
     </div>
   );
 };

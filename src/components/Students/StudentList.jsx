@@ -2,12 +2,10 @@
 import StudentCard from "./StudentCard";
 
 const StudentList = ({ students }) => {
-  const studentContainer = { display: "flex", gap: "2rem" };
-
   return (
     <>
-      <h1>Student List</h1>
-      <div style={studentContainer}>
+      <h1 className="text-xl font-bold">Student List</h1>
+      <div className="flex gap-4 flex-wrap mt-4">
         {students.map((st, index) => (
           <StudentCard
             key={index}

@@ -1,15 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const StudentForm = ({ setStudents }) => {
   //   const [name, setName] = useState("");
   //   const [avatar, setAvatar] = useState("");
   //   const [major, setMajor] = useState("0");
-  const [student, setStudent] = useState({
-    name: "",
-    avatar: "",
-    major: "0",
-  });
+  const refName = useRef(null);
+  const refAvatar = useRef(null);
+  const refMajor = useRef(null);
+  // const [student, setStudent] = useState({
+  //   name: "",
+  //   avatar: "",
+  //   major: "0",
+  // });
+  console.log("render");
 
   //   console.log({ name });
   //   console.log({ major });
@@ -23,17 +27,33 @@ const StudentForm = ({ setStudents }) => {
     // setName("");
     // setAvatar("");
     // setMajor("0");
-    setStudent({ name: "", avatar: "", major: "0" });
+    // setStudent({ name: "", avatar: "", major: "0" });
+    refAvatar.current.value=""
+    refName.current.value=""
+    refMajor.current.value="0"
+    // refName.current.focus()
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(student);
-    const { name, major, avatar } = student;
+    // console.log(student);
+    console.log("ref:", refName.current.value);
+    console.log("ref:", refAvatar.current.value);
+    console.log("ref:", refMajor.current.value);
+
+    const createStudent = {
+      name: refName.current.value,
+      major: refMajor.current.value,
+      avatar: refAvatar.current.value,
+    };
+
+    const {name,major,avatar} = createStudent;
+
+    // const { name, major, avatar } = student;
     if (!name || !major || !avatar) {
       alert("please type require data!");
     } else {
-      const newStudent = { sID: getID(), name, major, avatar };
+      const newStudent = { sID: getID(), ...createStudent };
       setStudents((prev) => [...prev, newStudent]);
       frmReset();
     }
@@ -48,10 +68,11 @@ const StudentForm = ({ setStudents }) => {
             type="text"
             name="name"
             id="name"
-            value={student.name}
-            onChange={(e) =>
-              setStudent((prev) => ({ ...prev, name: e.target.value }))
-            }
+            ref={refName}
+            // value={student.name}
+            // onChange={(e) =>
+            //   setStudent((prev) => ({ ...prev, name: e.target.value }))
+            // }
           />
         </div>
         <div>
@@ -60,10 +81,11 @@ const StudentForm = ({ setStudents }) => {
             type="text"
             name="avatar"
             id="avatar"
-            value={student.avatar}
-            onChange={(e) =>
-              setStudent((prev) => ({ ...prev, avatar: e.target.value }))
-            }
+            ref={refAvatar}
+            // value={student.avatar}
+            // onChange={(e) =>
+            //   setStudent((prev) => ({ ...prev, avatar: e.target.value }))
+            // }
           />
         </div>
         <div>
@@ -71,11 +93,12 @@ const StudentForm = ({ setStudents }) => {
           <select
             name="major"
             id="major"
-            defaultValue={student.major}
-            value={student.major}
-            onChange={(e) =>
-              setStudent((prev) => ({ ...prev, major: e.target.value }))
-            }
+            defaultValue={"0"}
+            ref={refMajor}
+            // value={student.major}
+            // onChange={(e) =>
+            //   setStudent((prev) => ({ ...prev, major: e.target.value }))
+            // }
           >
             <option value="0">select a major</option>
             <option value="math">Math</option>
