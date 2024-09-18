@@ -4,41 +4,25 @@ import { StudentContext } from "../../context/StudentProvider";
 
 const StudentForm = () => {
   const { setStudents } = useContext(StudentContext);
-  //   const [name, setName] = useState("");
-  //   const [avatar, setAvatar] = useState("");
-  //   const [major, setMajor] = useState("0");
+
   const refName = useRef(null);
   const refAvatar = useRef(null);
   const refMajor = useRef(null);
-  // const [student, setStudent] = useState({
-  //   name: "",
-  //   avatar: "",
-  //   major: "0",
-  // });
-  console.log("render");
-
-  //   console.log({ name });
-  //   console.log({ major });
-  //   console.log({ avatar });
+  
 
   const getID = () => {
     return Math.round(Math.random() * 1000);
   };
 
   const frmReset = () => {
-    // setName("");
-    // setAvatar("");
-    // setMajor("0");
-    // setStudent({ name: "", avatar: "", major: "0" });
+   
     refAvatar.current.value = "";
     refName.current.value = "";
     refMajor.current.value = "0";
-    // refName.current.focus()
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(student);
     console.log("ref:", refName.current.value);
     console.log("ref:", refAvatar.current.value);
     console.log("ref:", refMajor.current.value);
