@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import StudentForm from "./StudentForm";
 import StudentList from "./StudentList";
 import { studentsDummy } from "./data";
@@ -16,10 +16,19 @@ const Student = () => {
 
   // console.log(totalMark);
 
+  const handleClick = useCallback(() => {
+    console.log("handleClick");
+    //logic
+  }, [students]);
+
   return (
     <div>
       <StudentForm setStudents={setStudents} />
-      <StudentList students={students} setStudents={setStudents} />
+      <StudentList
+        students={students}
+        setStudents={setStudents}
+        handleClick={handleClick}
+      />
       <button onClick={() => setCount(count + 1)}>count</button>
     </div>
   );

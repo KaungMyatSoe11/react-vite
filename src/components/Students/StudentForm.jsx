@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { StudentContext } from "../../context/StudentProvider";
 
-const StudentForm = ({ setStudents }) => {
+const StudentForm = () => {
+  const { setStudents } = useContext(StudentContext);
   //   const [name, setName] = useState("");
   //   const [avatar, setAvatar] = useState("");
   //   const [major, setMajor] = useState("0");
@@ -28,9 +30,9 @@ const StudentForm = ({ setStudents }) => {
     // setAvatar("");
     // setMajor("0");
     // setStudent({ name: "", avatar: "", major: "0" });
-    refAvatar.current.value=""
-    refName.current.value=""
-    refMajor.current.value="0"
+    refAvatar.current.value = "";
+    refName.current.value = "";
+    refMajor.current.value = "0";
     // refName.current.focus()
   };
 
@@ -47,7 +49,7 @@ const StudentForm = ({ setStudents }) => {
       avatar: refAvatar.current.value,
     };
 
-    const {name,major,avatar} = createStudent;
+    const { name, major, avatar } = createStudent;
 
     // const { name, major, avatar } = student;
     if (!name || !major || !avatar) {

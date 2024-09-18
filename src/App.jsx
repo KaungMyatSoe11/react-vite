@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Post from "./components/Post";
 import Student from "./components/Students/Student";
+import Count from "./components/ReducerComponent/Count";
+import StudentProvider from "./context/StudentProvider";
 
 function App() {
-  const [Count, setCount] = useState(0);
-  const [PCount, setPCount] = useState(0);
+  // const [Count, setCount] = useState(0);
+  // const [PCount, setPCount] = useState(0);
   return (
     <div className="container mx-auto">
       {/* <Counter /> */}
-      <Student />
+        <Student />
       {/* <Post PCount={PCount} />
 
       <button
@@ -23,6 +25,8 @@ function App() {
       >
         Post click count{PCount}
       </button> */}
+
+      {/* <Count/> */}
     </div>
   );
 }

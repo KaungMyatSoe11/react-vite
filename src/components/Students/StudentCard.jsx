@@ -1,19 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import cssClasses from "./studentCard.module.css";
-const StudentCard = ({
-  name,
-  sID,
-  major,
-  avatar,
-  setStudents,
-  handleDelete,
-}) => {
+const StudentCard = ({ name, sID, major, avatar, handleDelete }) => {
   const updateName = useMemo(() => {
     console.log("calculation process");
     return `Mg ${name}`;
   }, [name]);
-  // console.log(totalMark);
 
   return (
     <div className="border p-[1rem] border-slate-600 rounded-md cursor-pointer transition-all duration-500 ease-in-out hover:scale-90 hover:bg-slate-900 hover:text-white ">
@@ -42,4 +34,4 @@ const StudentCard = ({
 //   s
 // }
 
-export default StudentCard;
+export default memo(StudentCard);
