@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import { StudentContext } from "../../context/StudentProvider";
+import StudentForm from "./StudentForm";
+import StudentList from "./StudentList";
 
 const Student = () => {
-  const { students } = useContext(StudentContext);
-
-  console.log(students);
-
-  return <div>{students.isLoading ? "loading.." : students.data.length}</div>;
+  return (
+    <div>
+      <StudentForm />
+      <StudentList />
+    </div>
+  );
 };
 
 export default Student;

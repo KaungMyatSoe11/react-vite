@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import { createContext, useEffect, useReducer } from "react";
 
 export const StudentContext = createContext(null);
@@ -18,6 +17,21 @@ const StudentProvider = ({ children }) => {
         return { ...state, data: action.payload, isLoading: false };
       case "LOADING":
         return { ...state, isLoading: true };
+      case "ADD_STUDENT":
+        return {
+          ...state,
+          data: [...state.data, action.payload],
+        };
+      case "DELETE_STUDENT":
+        const filterStudents = state.data.filter(
+          (st) => st._id !== action.payload._id
+        );
+
+        return {
+          ...state,
+          data: [...filterStudents],
+        };
+
       default:
         return { ...state };
     }
@@ -28,19 +42,26 @@ const StudentProvider = ({ children }) => {
   console.log(students);
 
   const fetchStudent = async (signal) => {
-    const res = await fetch("https://st-api.kaungmyatsoe.dev/api/v1/students", {
-      method: "GET",
-      headers: {
-        key:
-          "43/UgWoJWW8pXKRmM48xYp8uuIXXLaBM1USAblj50X5GrVUdaluW36lEjoAbylSL6m4g9OXOxb9p7teXUyph5w",
-      },
-      signal,
-    });
+    try {
+      const res = await fetch(
+        "https://st-api.kaungmyatsoe.dev/api/v1/students",
+        {
+          method: "GET",
+          headers: {
+            key:
+              "43/UgWoJWW8pXKRmM48xYp8uuIXXLaBM1USAblj50X5GrVUdaluW36lEjoAbylSL6m4g9OXOxb9p7teXUyph5w",
+          },
+          signal,
+        }
+      );
 
-    const data = await res.json();
-    console.log(data);
-    //dispatch
-    dispatch({ type: "FETCH", payload: data.students });
+      const data = await res.json();
+      console.log(data);
+      //dispatch
+      dispatch({ type: "FETCH", payload: data.students });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
