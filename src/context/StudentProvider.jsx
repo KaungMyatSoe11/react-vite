@@ -1,45 +1,17 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useReducer } from "react";
+import studentReducer from "../reducers/studentReducer";
 
 export const StudentContext = createContext(null);
 
+const initStudent = {
+  data: [],
+  isLoading: false,
+  isError: false,
+  students: [],
+};
 const StudentProvider = ({ children }) => {
-  const initStudent = {
-    data: [],
-    isLoading: false,
-    isError: false,
-  };
-
-  const studentReducer = (state, action) => {
-    console.log(action);
-
-    switch (action.type) {
-      case "FETCH":
-        return { ...state, data: action.payload, isLoading: false };
-      case "LOADING":
-        return { ...state, isLoading: true };
-      case "ADD_STUDENT":
-        return {
-          ...state,
-          data: [...state.data, action.payload],
-        };
-      case "DELETE_STUDENT":
-        const filterStudents = state.data.filter(
-          (st) => st._id !== action.payload._id
-        );
-
-        return {
-          ...state,
-          data: [...filterStudents],
-        };
-
-      default:
-        return { ...state };
-    }
-  };
-
-  const [students, dispatch] = useReducer(studentReducer, initStudent);
-
-  console.log(students);
+  const [state, dispatch] = useReducer(studentReducer, initStudent);
 
   const fetchStudent = async (signal) => {
     try {
@@ -63,6 +35,7 @@ const StudentProvider = ({ children }) => {
       console.log(error);
     }
   };
+  //
 
   useEffect(() => {
     dispatch({ type: "LOADING" });
@@ -76,7 +49,7 @@ const StudentProvider = ({ children }) => {
   }, []);
 
   return (
-    <StudentContext.Provider value={{ students, dispatch }}>
+    <StudentContext.Provider value={{ state, dispatch }}>
       {children}
     </StudentContext.Provider>
   );

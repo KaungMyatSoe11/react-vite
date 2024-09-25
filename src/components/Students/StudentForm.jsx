@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useContext, useRef, useState } from "react";
-import { StudentContext } from "../../context/StudentProvider";
+import { useRef, useState } from "react";
+import useStudent from "../../hooks/useStudent";
 
 const StudentForm = () => {
-  const { students, dispatch } = useContext(StudentContext);
+  const { dispatch } = useStudent();
   const [isCreating, setIsCreating] = useState(false);
 
   const refName = useRef(null);

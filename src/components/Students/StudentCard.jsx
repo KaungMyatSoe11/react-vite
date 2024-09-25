@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import { memo, useContext, useState } from "react";
+import { memo, useState } from "react";
 import cssClasses from "./studentCard.module.css";
-import { StudentContext } from "../../context/StudentProvider";
+import useStudent from "../../hooks/useStudent";
 const StudentCard = ({ student }) => {
   const { name, studentCode, major, avatar, _id } = student;
-  const { dispatch } = useContext(StudentContext);
+  const { dispatch } = useStudent();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteStudent = async (sId) => {
