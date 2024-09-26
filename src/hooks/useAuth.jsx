@@ -1,5 +1,5 @@
 const useAuth = () => {
-  const user =null;
+  const user = { name: "kms" };
   //api usid
   return {
     user,

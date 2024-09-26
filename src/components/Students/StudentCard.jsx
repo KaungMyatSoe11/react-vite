@@ -2,6 +2,7 @@
 import { memo, useState } from "react";
 import cssClasses from "./studentCard.module.css";
 import useStudent from "../../hooks/useStudent";
+import { Link } from "react-router-dom";
 const StudentCard = ({ student }) => {
   const { name, studentCode, major, avatar, _id } = student;
   const { dispatch } = useStudent();
@@ -46,23 +47,29 @@ const StudentCard = ({ student }) => {
 
   return (
     <div className="border p-[1rem] border-slate-600 rounded-md cursor-pointer transition-all duration-500 ease-in-out hover:scale-90 hover:bg-slate-900 hover:text-white ">
-      <div>
+      <Link to={`/student/${student.studentCode}`}>
         <div>
-          <img src={avatar} alt={name} className={cssClasses.studentCardImg} />
           <div>
-            <h2>{name}</h2>
-            <p>Student ID: {studentCode}</p>
+            <img
+              src={avatar}
+              alt={name}
+              className={cssClasses.studentCardImg}
+            />
+            <div>
+              <h2>{name}</h2>
+              <p>Student ID: {studentCode}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div>Major: {major}</div>
-      {/* <div>totalMark :{totalMark}</div> */}
-      <button
-        onClick={handleDelete}
-        className="bg-red-600 text-white rounded-sm p-3"
-      >
-        {isDeleting ? "Processing" : "Delete"}
-      </button>
+        <div>Major: {major}</div>
+        {/* <div>totalMark :{totalMark}</div> */}
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 text-white rounded-sm p-3"
+        >
+          {isDeleting ? "Processing" : "Delete"}
+        </button>
+      </Link>
     </div>
   );
 };
